@@ -68,7 +68,53 @@ export default function Navbar() {
                 <div onClick={openAndClose} className="lg:hidden">
                     {show ? <FaBars /> : <IoCloseSharp />}
                 </div>
+
+               
             </nav>
+
+
+             {/* Mobile Menu  */}
+               <div className='px-20'>
+                 {
+                    !show && <div className='lg:hidden absolute top-25 start-0 w-full'>
+
+                        <div className="flex gap-5 bg-amber-300 w-full">
+
+
+                            {/* Menu Data  */}
+                            <ul className="flex flex-col gap-5 items-center justify-center navFontsLogo w-full">
+                                {
+                                    MenuData.map(({ icons, name, link }, key) => (
+                                        <a key={key} href={link}>
+                                            <li className="flex items-center gap-2 hover:bg-gray-600 hover:text-white px-3 py-1 rounded-md">
+                                                {icons}
+                                                <h2>{name}</h2>
+                                            </li>
+                                        </a>
+                                    ))
+                                }
+
+                                {/* Auth  */}
+                               <div className='flex items-center gap-5'>
+                                 {
+                                    Auth.map(({ icons, name, href, css }, i) => (
+                                        <a key={i} href="#">
+                                            <button className={`${css}  hover:scale-110 duration-300 font-bold text-white px-3 py-2 rounded-md flex items-center gap-2`}>
+                                                {icons}
+                                                {name}
+                                            </button>
+
+                                        </a>
+                                    ))
+                                }
+                               </div>
+
+                            </ul>
+                        </div>
+                    </div>
+                }
+               </div>
+               
         </header>
     )
 }

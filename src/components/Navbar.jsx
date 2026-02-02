@@ -1,120 +1,24 @@
-import { useState } from 'react'
-import { FaHome, FaBlog, FaChild } from "react-icons/fa";
-import { GrRestroomMen, GrRestroomWomen } from "react-icons/gr";
-import { FcAbout, FcBusinessContact } from "react-icons/fc";
-import { CiLogin, CiLogout } from "react-icons/ci";
-import { FaBars } from "react-icons/fa";
-import { IoCloseSharp } from "react-icons/io5";
+import {useState} from 'react'
 
 export default function Navbar() {
 
-    const [show, addvalue] = useState(true)
-    const MenuData = [
-        // { icons: <FaHome />, name: 'Home', link: '/' },
-        // { icons: <GrRestroomMen />, name: 'Men', link: '/men' },
-        // { icons: <GrRestroomWomen />, name: 'Women', link: '/women' },
-        { icons: <FaChild />, name: 'Kids', link: '/kids' },
-        { icons: <FcAbout />, name: 'About', link: '/about' },
-        { icons: <FaBlog />, name: 'Blogs', link: '/blogs' },
-        { icons: <FcBusinessContact />, name: 'contact Us', link: '/contact-us' },
-    ]
+    const [value,setValue] =useState('Result')
 
-    const Auth = [
-        { icons: <CiLogin className="text-2xl" />, name: 'log In', href: '/log-in', css: 'bg-blue-400' },
-        { icons: <CiLogout className="text-2xl" />, name: 'Sign Up', href: '/sign-up', css: 'bg-orange-900' },
-    ]
-
-    const openAndClose = () => {
-        addvalue(!show)
-    }
 
     return (
-        <header className="py-5 px-10">
-            <nav className="flex rounded-full justify-between items-center py-5 px-10 bg-amber-500 shadow-lg shadow-pink-400">
+        <div className='flex justify-center items-center h-screen bg-black'>
+            <div className='bg-white p-10 rounded-lg shadow-[0px_0px_20px_orange] flex flex-col gap-5 justify-center items-center'>
+                <textarea onChange={(e)=>setValue(e.target.value)} className='w-full outline-none ring-2 rounded-lg ring-red-700 focus:ring-amber-400' name="" id="" placeholder='Enter a Message'></textarea>
 
-                {/* Logo  */}
-                <h1 className="logo text-3xl"><a href="#">PureBuy</a></h1>
-
-                {/* Menu Data  */}
-                <ul className="hidden lg:flex gap-5 items-center navFontsLogo">
-                    {
-                        MenuData.map(({ icons, name, link }, key) => (
-                            <a key={key} href={link}>
-                                <li className="flex items-center gap-2 hover:bg-gray-600 hover:text-white px-3 py-1 rounded-md">
-                                    {icons}
-                                    <h2>{name}</h2>
-                                </li>
-                            </a>
-                        ))
-                    }
-
-                </ul>
-
-                {/* Auth  */}
-                <div className="hidden lg:flex gap-5">
-                    {
-                        Auth.map(({ icons, name, href, css }, i) => (
-                            <a key={i} href="#">
-                                <button className={`${css} hover:scale-110 duration-300 font-bold text-white px-3 py-2 rounded-md flex items-center gap-2`}>
-                                    {icons}
-                                    {name}
-                                </button>
-
-                            </a>
-                        ))
-                    }
+                <div className='flex gap-3'>
+                    <button onClick={()=>setValue(value.toUpperCase())} className='bg-blue-600 px-2 py-1 rounded-md text-white'>Upper</button>
+                    <button onClick={()=>setValue(value.toLowerCase())} className='bg-red-600 px-2 py-1 rounded-md text-white'>Lower</button>
+                    <button onClick={()=>setValue(value.length)} className='bg-orange-600 px-2 py-1 rounded-md text-white'>Count</button>
+                    <button onClick={()=>setValue('')} className='bg-gray-600 px-2 py-1 rounded-md text-white'>Reset</button>
                 </div>
 
-                <div onClick={openAndClose} className="lg:hidden">
-                    {show ? <FaBars /> : <IoCloseSharp />}
-                </div>
-
-               
-            </nav>
-
-
-             {/* Mobile Menu  */}
-               <div className='px-20'>
-                 {
-                    !show && <div className='lg:hidden absolute top-25 start-0 w-full'>
-
-                        <div className="flex gap-5 bg-amber-300 w-full">
-
-
-                            {/* Menu Data  */}
-                            <ul className="flex flex-col gap-5 items-center justify-center navFontsLogo w-full">
-                                {
-                                    MenuData.map(({ icons, name, link }, key) => (
-                                        <a key={key} href={link}>
-                                            <li className="flex items-center gap-2 hover:bg-gray-600 hover:text-white px-3 py-1 rounded-md">
-                                                {icons}
-                                                <h2>{name}</h2>
-                                            </li>
-                                        </a>
-                                    ))
-                                }
-
-                                {/* Auth  */}
-                               <div className='flex items-center gap-5'>
-                                 {
-                                    Auth.map(({ icons, name, href, css }, i) => (
-                                        <a key={i} href="#">
-                                            <button className={`${css}  hover:scale-110 duration-300 font-bold text-white px-3 py-2 rounded-md flex items-center gap-2`}>
-                                                {icons}
-                                                {name}
-                                            </button>
-
-                                        </a>
-                                    ))
-                                }
-                               </div>
-
-                            </ul>
-                        </div>
-                    </div>
-                }
-               </div>
-               
-        </header>
+                <p>{value}</p>
+            </div>
+        </div>
     )
 }
